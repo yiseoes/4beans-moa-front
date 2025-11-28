@@ -2,8 +2,8 @@
 import { useEffect } from "react";
 import { initSignupPage } from "@/services/logic/addUserPageLogic";
 
-import kakaoIcon from "@/assets/icons/kakao.png";
-import googleIcon from "@/assets/icons/google.png";
+// import kakaoIcon from "@/assets/icons/kakao.png";
+// import googleIcon from "@/assets/icons/google.png";
 
 import {
   Card,
@@ -70,8 +70,6 @@ export default function AddUserPage() {
 
             <Button
               id="btnPhoneVerify"
-              role="link"
-              data-href="/auth/pass"
               type="button"
               className="cursor-pointer"
             >
@@ -98,16 +96,6 @@ export default function AddUserPage() {
           {/* 이용약관 */}
           <div className="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
             <label className="flex items-center gap-2">
-              <input id="agreeService" type="checkbox" className="cursor-pointer" />
-              서비스 이용약관 동의 (필수)
-            </label>
-
-            <label className="flex items-center gap-2">
-              <input id="agreePrivacy" type="checkbox" className="cursor-pointer" />
-              개인정보 처리방침 동의 (필수)
-            </label>
-
-            <label className="flex items-center gap-2">
               <input id="agreeMarketing" type="checkbox" className="cursor-pointer" />
               마케팅 정보 수신 동의 (선택)
             </label>
@@ -120,14 +108,12 @@ export default function AddUserPage() {
           </Button>
         </CardFooter>
       </Card>
-
-      {/* 소셜 계정 */}
       <Card className="w-full max-w-xl mt-8">
-        <CardHeader>
+        {/* <CardHeader>
           <CardTitle className="text-base">소셜 계정으로 간편 가입</CardTitle>
-        </CardHeader>
+        </CardHeader> */}
 
-        <CardContent className="space-y-3">
+        {/* <CardContent className="space-y-3">
           <Button
             id="btnKakaoSignup"
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-black flex items-center justify-center gap-2 cursor-pointer"
@@ -144,7 +130,7 @@ export default function AddUserPage() {
             <img src={googleIcon} className="w-6 h-6" />
             Google 계정으로 가입
           </Button>
-        </CardContent>
+        </CardContent> */}
       </Card>
     </div>
   );

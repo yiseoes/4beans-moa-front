@@ -66,7 +66,7 @@ export const checkPasswordConfirm = (password, confirm) =>
   axios.post("/api/user/check-password-confirm", { password, confirm });
 
 export const startPassAuth = () =>
-  axios.post("/api/auth/pass/start");
+  axios.get("/api/auth/pass/start");
 
 export const passCallback = (data) =>
   axios.post("/api/auth/pass/callback", data);
