@@ -515,13 +515,11 @@ erDiagram
 | **1:1 문의** | 등록/수정/삭제, 파일 첨부, 관리자 답변 시스템 |
 | **권한 분기** | JWT 기반 사용자/관리자 권한에 따른 화면 및 기능 분기 처리 |
 
-#### 3. 알림 시스템 - **전담 설계/구현** (Full Stack)
+#### 3. Push 알림 시스템 - **전담 설계/구현** (Full Stack)
 
-> **Push 알림 25종 + 이메일 알림** 전체 로직 설계, 백엔드 구현, 프론트엔드 UI까지 전담 개발
+> **Push 알림 25종** 전체 로직 설계, 백엔드 구현, 프론트엔드 UI까지 전담 개발
 
-##### 3-1. Push 알림 시스템 (SSE 기반 실시간 알림)
-
-**Backend 구현**
+**Backend 구현 - SSE 기반 실시간 알림**
 ```java
 // SSE 기반 실시간 알림 시스템
 @Service
@@ -565,34 +563,6 @@ TransactionSynchronizationManager.registerSynchronization(
 - 실시간 알림 토스트 UI
 - 알림 목록 페이지 (읽음/안읽음 처리)
 - 알림 설정 (알림 종류별 ON/OFF)
-
-##### 3-2. 이메일 알림 시스템 (Resend API)
-
-**발송 유형**
-| 이메일 종류 | 설명 |
-|-------------|------|
-| **회원가입 인증** | 이메일 인증 코드 발송 및 검증 |
-| **비밀번호 재설정** | 임시 비밀번호 또는 재설정 링크 발송 |
-| **문의 답변 알림** | 관리자 답변 완료 시 이메일 알림 |
-
-**Backend 구현**
-```java
-// Resend API를 통한 이메일 발송
-@Service
-public class EmailService {
-    private final Resend resend;
-
-    public void sendVerificationEmail(String email, String code) {
-        CreateEmailOptions params = CreateEmailOptions.builder()
-            .from("MOA <noreply@moa.com>")
-            .to(email)
-            .subject("[MOA] 이메일 인증 코드")
-            .html(buildVerificationTemplate(code))
-            .build();
-        resend.emails().send(params);
-    }
-}
-```
 
 #### 4. API 테스트
 | 도구 | 활용 |
