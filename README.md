@@ -446,7 +446,7 @@ erDiagram
 | **육주영** | 팀장 | 회원관리, 어드민, 인증 | [@github](https://github.com/) |
 | **박한솔** | Git 관리자 | 파티, 결제, 보증금, 정산 | [@github](https://github.com/) |
 | **김진원** | 클라우드 관리자 | 구독상품, AWS 인프라 | [@github](https://github.com/) |
-| **김이서** | DBA | 고객센터, 알림, DB 설계 | [@github](https://github.com/) |
+| **김이서** | DBA | 커뮤니티(공지/FAQ/문의), Push 알림 시스템, DB 설계 | [@yiseoes](https://github.com/yiseoes) |
 
 <br>
 
@@ -497,14 +497,113 @@ erDiagram
 
 ---
 
-### 김이서 - 고객센터 / 알림
+### 김이서 - 커뮤니티 / Push 알림 시스템 / DB 설계
 
-#### 구현 기능
-- 공지사항 CRUD
-- FAQ 관리
-- 1:1 문의/답변 시스템
-- 이메일 알림 (Resend)
-- DB 스키마 설계
+#### 1. DB 설계 및 데이터 관리
+| 항목 | 상세 내용 |
+|------|-----------|
+| **ERD 설계** | 도메인 기반 ERD 설계 논의 참여 및 테이블 구조 정의 |
+| **샘플 데이터** | 테스트용 시드 스크립트 작성 (사용자 50명, 구독/결제/문의 등 500+건) |
+| **인덱스 설계** | 쿼리 성능 최적화를 위한 인덱스 설계 기준 수립 |
+| **버전 관리** | DB 스키마 변경 이력 Git 기반 버전 관리 |
+
+#### 2. 커뮤니티 도메인 (공지/FAQ/문의) - Full Stack
+| 기능 | 상세 구현 |
+|------|-----------|
+| **공지사항** | CRUD, 검색/필터, 페이징, 관리자 등록/수정 |
+| **FAQ** | 카테고리별 조회, 검색, 관리자 CRUD |
+| **1:1 문의** | 등록/수정/삭제, 파일 첨부, 관리자 답변 시스템 |
+| **권한 분기** | JWT 기반 사용자/관리자 권한에 따른 화면 및 기능 분기 처리 |
+
+#### 3. 알림 시스템 - **전담 설계/구현** (Full Stack)
+
+> **Push 알림 25종 + 이메일 알림** 전체 로직 설계, 백엔드 구현, 프론트엔드 UI까지 전담 개발
+
+##### 3-1. Push 알림 시스템 (SSE 기반 실시간 알림)
+
+**Backend 구현**
+```java
+// SSE 기반 실시간 알림 시스템
+@Service
+public class NotificationService {
+    // ConcurrentHashMap으로 사용자별 SSE 연결 관리
+    private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
+
+    // 실시간 알림 전송
+    public void sendNotification(Long userId, NotificationDto notification) {
+        SseEmitter emitter = emitters.get(userId);
+        if (emitter != null) {
+            emitter.send(notification);
+        }
+    }
+}
+
+// 트랜잭션 커밋 후 알림 발송 (데이터 정합성 보장)
+TransactionSynchronizationManager.registerSynchronization(
+    new TransactionSynchronization() {
+        @Override
+        public void afterCommit() {
+            notificationService.sendNotification(userId, notification);
+        }
+    }
+);
+```
+
+**Push 알림 25종 이벤트**
+| 카테고리 | 알림 종류 |
+|----------|-----------|
+| **결제** | 결제 성공, 결제 실패, 결제 재시도, 결제 예정 |
+| **정산** | 정산 완료, 정산 대기, 계좌 등록 요청 |
+| **파티** | 파티 가입, 파티 탈퇴, 파티 해산, 파티 일시정지 |
+| **보증금** | 보증금 결제, 보증금 환불, 보증금 차감 |
+| **문의** | 문의 등록, 답변 완료 |
+| **공지** | 새 공지사항 |
+| **기타** | 회원가입 환영, 비밀번호 변경 등 |
+
+**Frontend 구현**
+- SSE 연결 관리 및 자동 재연결 로직
+- 실시간 알림 토스트 UI
+- 알림 목록 페이지 (읽음/안읽음 처리)
+- 알림 설정 (알림 종류별 ON/OFF)
+
+##### 3-2. 이메일 알림 시스템 (Resend API)
+
+**발송 유형**
+| 이메일 종류 | 설명 |
+|-------------|------|
+| **회원가입 인증** | 이메일 인증 코드 발송 및 검증 |
+| **비밀번호 재설정** | 임시 비밀번호 또는 재설정 링크 발송 |
+| **문의 답변 알림** | 관리자 답변 완료 시 이메일 알림 |
+
+**Backend 구현**
+```java
+// Resend API를 통한 이메일 발송
+@Service
+public class EmailService {
+    private final Resend resend;
+
+    public void sendVerificationEmail(String email, String code) {
+        CreateEmailOptions params = CreateEmailOptions.builder()
+            .from("MOA <noreply@moa.com>")
+            .to(email)
+            .subject("[MOA] 이메일 인증 코드")
+            .html(buildVerificationTemplate(code))
+            .build();
+        resend.emails().send(params);
+    }
+}
+```
+
+#### 4. API 테스트
+| 도구 | 활용 |
+|------|------|
+| **JUnit** | 단위 테스트 작성 (Service, DAO 계층) |
+| **Postman** | REST API 기능 테스트 수행 |
+
+#### 기술적 챌린지
+- **SSE 연결 관리**: 서버 재시작/네트워크 끊김 시 자동 재연결 구현
+- **트랜잭션 동기화**: `TransactionSynchronization` 활용하여 DB 커밋 후 알림 발송
+- **동시성 처리**: `ConcurrentHashMap`으로 멀티스레드 환경에서 안전한 연결 관리
 
 <br>
 
