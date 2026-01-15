@@ -17,85 +17,24 @@ Netflix, Disney+, Wavve 등 OTT 서비스를 파티원들과 함께 공유하여
 
 ## 스크린샷
 
-### 메인 화면 (Pop 테마)
+### 메인 & 테마 시스템
 <p align="center">
-  <img src="./screenshots/main(pop).JPG" alt="메인 화면" width="800"/>
+  <img src="./screenshots/main(pop).JPG" alt="메인 화면 (Pop 테마)" width="700"/>
 </p>
 
-### 4가지 테마 시스템
 | Classic | Dark | Christmas |
 |:-------:|:----:|:---------:|
-| <img src="./screenshots/theme(classic).JPG" alt="Classic 테마" width="280"/> | <img src="./screenshots/theme(dark).JPG" alt="Dark 테마" width="280"/> | <img src="./screenshots/theme(christmas).JPG" alt="Christmas 테마" width="280"/> |
+| <img src="./screenshots/theme(classic).JPG" alt="Classic" width="260"/> | <img src="./screenshots/theme(dark).JPG" alt="Dark" width="260"/> | <img src="./screenshots/theme(christmas).JPG" alt="Christmas" width="260"/> |
 
-<p align="center">
-  <img src="./screenshots/ThemeSwitcher.JPG" alt="테마 스위처" width="300"/>
-  <br><em>테마 스위처 UI</em>
-</p>
+### 핵심 기능
+| 파티 상세 | 결제/보증금 | 관리자 대시보드 |
+|:--------:|:----------:|:-------------:|
+| <img src="./screenshots/party_detail.JPG" alt="파티 상세" width="260"/> | <img src="./screenshots/MyWallet.JPG" alt="금융 내역" width="260"/> | <img src="./screenshots/admin_Dashboard.JPG" alt="대시보드" width="260"/> |
 
-### 파티 시스템
-| 파티 목록 | 파티 상세 | 파티 생성 |
-|:--------:|:--------:|:--------:|
-| <img src="./screenshots/party.JPG" alt="파티 목록" width="280"/> | <img src="./screenshots/party_detail.JPG" alt="파티 상세" width="280"/> | <img src="./screenshots/addparty.JPG" alt="파티 생성" width="280"/> |
-
-| 내 파티 목록 | 파티 생성 (계정입력) | 보증금 결제 |
-|:----------:|:-----------------:|:----------:|
-| <img src="./screenshots/mypartylist.JPG" alt="내 파티" width="280"/> | <img src="./screenshots/addparty2.JPG" alt="파티 생성2" width="280"/> | <img src="./screenshots/party_Deposit.JPG" alt="보증금" width="280"/> |
-
-### 회원 / 인증
-| 로그인 | 회원가입 | 마이페이지 |
-|:-----:|:-------:|:--------:|
-| <img src="./screenshots/login.JPG" alt="로그인" width="280"/> | <img src="./screenshots/adduser.JPG" alt="회원가입" width="280"/> | <img src="./screenshots/mypage.JPG" alt="마이페이지" width="280"/> |
-
-| 로그인 기록 | 챗봇 |
-|:---------:|:----:|
-| <img src="./screenshots/mypage_loglist.JPG" alt="로그인 기록" width="280"/> | <img src="./screenshots/ChatBot.JPG" alt="챗봇" width="280"/> |
-
-### 상품 / 구독
-| 상품 목록 | 내 구독 목록 |
-|:--------:|:----------:|
-| <img src="./screenshots/product.JPG" alt="상품 목록" width="400"/> | <img src="./screenshots/SubscriptionList.JPG" alt="구독 목록" width="400"/> |
-
-### 금융 내역
-| 내 지갑 | 결제 내역 | 보증금 내역 |
-|:------:|:--------:|:----------:|
-| <img src="./screenshots/MyWallet.JPG" alt="지갑" width="280"/> | <img src="./screenshots/PaymentHistoryList.JPG" alt="결제내역" width="280"/> | <img src="./screenshots/DepositHistoryList.JPG" alt="보증금내역" width="280"/> |
-
-| 결제 상세 | 보증금 상세 |
-|:--------:|:----------:|
-| <img src="./screenshots/PaymentDetailModal.JPG" alt="결제상세" width="400"/> | <img src="./screenshots/DepositDetailModal.JPG" alt="보증금상세" width="400"/> |
-
-### 관리자 - 대시보드
-| 대시보드 (상단) | 대시보드 (하단) |
-|:-------------:|:-------------:|
-| <img src="./screenshots/admin_Dashboard.JPG" alt="대시보드1" width="400"/> | <img src="./screenshots/admin_Dashboard2.JPG" alt="대시보드2" width="400"/> |
-
-### 관리자 - 회원/상품 관리
-| 회원 목록 | 구독상품 추가 |
-|:--------:|:-----------:|
-| <img src="./screenshots/admin_userlist.JPG" alt="회원목록" width="400"/> | <img src="./screenshots/admin_addsubscription.JPG" alt="상품추가" width="400"/> |
-
-### 관리자 - 공지/FAQ
-| 공지 목록 | 공지 등록 | 공지 상세 |
-|:--------:|:--------:|:--------:|
-| <img src="./screenshots/admin_noticelist.JPG" alt="공지목록" width="280"/> | <img src="./screenshots/admin_addnotice.JPG" alt="공지등록" width="280"/> | <img src="./screenshots/admin_detailnotice.JPG" alt="공지상세" width="280"/> |
-
-| FAQ 목록 | FAQ 등록 | FAQ 수정 |
-|:-------:|:-------:|:-------:|
-| <img src="./screenshots/admin_faqlist.JPG" alt="FAQ목록" width="280"/> | <img src="./screenshots/admin_addfaq.JPG" alt="FAQ등록" width="280"/> | <img src="./screenshots/admin_faqupdate.JPG" alt="FAQ수정" width="280"/> |
-
-### 관리자 - 문의 관리
-| 문의 목록 | 문의 상세 | 답변 작성 |
-|:--------:|:--------:|:--------:|
-| <img src="./screenshots/admin_Inquiry.JPG" alt="문의목록" width="280"/> | <img src="./screenshots/admin_InquiryDetailModal.JPG" alt="문의상세" width="280"/> | <img src="./screenshots/admin_AnswerModal.JPG" alt="답변작성" width="280"/> |
-
-### 관리자 - Push 알림 관리
-| 템플릿 관리 | 발송 내역 | 수동 발송 |
-|:----------:|:--------:|:--------:|
-| <img src="./screenshots/admin_pushTemplate.JPG" alt="템플릿" width="280"/> | <img src="./screenshots/admin_pushHistory.JPG" alt="발송내역" width="280"/> | <img src="./screenshots/admin_pushSend.JPG" alt="수동발송" width="280"/> |
-
-| 발송 폼 |
-|:-------:|
-| <img src="./screenshots/admin_sendForm.JPG" alt="발송폼" width="400"/> |
+### Push 알림 & 커뮤니티 관리
+| 알림 발송 내역 | 문의 관리 |
+|:------------:|:--------:|
+| <img src="./screenshots/admin_pushHistory.JPG" alt="알림 발송" width="380"/> | <img src="./screenshots/admin_Inquiry.JPG" alt="문의 관리" width="380"/> |
 
 <br>
 
